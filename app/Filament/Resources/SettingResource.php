@@ -7,6 +7,7 @@ use App\Filament\Resources\SettingResource\RelationManagers;
 use App\Models\Setting;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,9 +25,9 @@ class SettingResource extends Resource
 
     public static function canCreate(): bool
     {
-        if(Setting::count() > 0){
+        if (Setting::count() > 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -34,46 +35,57 @@ class SettingResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('school_name')
-                    ->required()
-                    ->maxLength(255)
-                    ->default('Edusoft Schools'),
-                Forms\Components\Textarea::make('caption')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('address')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('contact')
-                    ->columnSpanFull(),
-                FileUpload::make('logo')
-                ->image()
-                ->avatar()
-                ->imageEditor()
-                
-                ->circleCropper(),
-                FileUpload::make('favicon')
-                ->image()
-                ->avatar()
-                ->imageEditor()
-                ->circleCropper(),
-                Forms\Components\TextInput::make('meta_title')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\Textarea::make('meta_description')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('meta_keywords')
-                    ->columnSpanFull(),
-                Select::make('frontend_theme')
-                    ->required()
-                    ->options(
-                        [
-                        'default' => 'Default',
-                        'dark' => 'Dark',
-                        'light' => 'Light',
-                        ]
-                    )
-                    ->default('default')
-                    ->label('App Theme')
-                    ,
+                Section::make('')->schema([
+                    Forms\Components\TextInput::make('school_name')
+                        ->required()
+                        ->maxLength(255)
+                        ->default('Edusoft Schools'),
+                        Select::make('frontend_theme')
+                        ->required()
+                        ->options(
+                            [
+                                'default' => 'Default',
+                                'dark' => 'Dark',
+                                'light' => 'Light',
+                            ]
+                        )
+                        ->default('default')
+                        ->label('App Theme'),
+                    Forms\Components\Textarea::make('caption')
+                        ->columnSpanFull(),
+                    Forms\Components\Textarea::make('address')
+                        ->columnSpanFull(),
+                    Forms\Components\Textarea::make('contact')
+                        ->columnSpanFull(),
+                    FileUpload::make('logo')
+                        ->image()
+                        ->avatar()
+                        ->imageEditor()
+
+                        ->circleCropper(),
+                    FileUpload::make('principal_signature')
+                        ->image()
+                        ->avatar()
+                        ->imageEditor()
+
+                        ->circleCropper(),
+                    FileUpload::make('favicon')
+                        ->image()
+                        ->avatar()
+                        ->imageEditor()
+                        ->circleCropper(),
+                    Forms\Components\TextInput::make('meta_title')
+                        ->maxLength(255)
+                        ->default(null),
+                    Forms\Components\TextInput::make('principal_name')
+                        ->maxLength(255)
+                        ->default(null),
+                    Forms\Components\Textarea::make('meta_description')
+                        ->columnSpanFull(),
+                    Forms\Components\Textarea::make('meta_keywords')
+                        ->columnSpanFull(),
+                   
+                ])->columns(3)
             ]);
     }
 
@@ -89,7 +101,7 @@ class SettingResource extends Resource
                 Tables\Columns\TextColumn::make('frontend_theme')
                     ->label('App Theme'),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()    
+                    ->dateTime()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()

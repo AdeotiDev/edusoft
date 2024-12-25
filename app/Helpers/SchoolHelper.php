@@ -19,15 +19,18 @@ if (!function_exists('getSchoolDetails')) {
             'meta_description' => $school->meta_description,
             'meta_title' => $school->meta_title,
             'meta_keywords' => $school->meta_keywords,
+            'principal_name' => $school->principal_name,
+            'principal_signature' => $school->principal_signature,
         ];
     }
 
 
 
 
-    if(!function_exists('getSchoolStats')){
+    if (!function_exists('getSchoolStats')) {
 
-        function getSchoolStats(){
+        function getSchoolStats()
+        {
 
             $totalStudents = Student::count();
             $totalTeachers = Teacher::count();
@@ -40,6 +43,5 @@ if (!function_exists('getSchoolDetails')) {
                 'totalClasses' => number_format($totalClasses)
             ];
         }
-
     }
 }

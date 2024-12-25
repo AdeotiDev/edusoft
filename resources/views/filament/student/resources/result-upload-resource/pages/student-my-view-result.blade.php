@@ -16,6 +16,7 @@
             @php
                 $loggedInStudentId = auth()->user()->id;
                 $school_logo = $schoolDetails['school_logo'];
+                $principal_signature = $schoolDetails['principal_signature'];
                 $studentData = [];
                 $dynamicHeaders = [];
 
@@ -186,11 +187,18 @@
                                         @endphp
                                         {{ $comment }}
                                     </td>
+                                    <td>
+                                        {{ $schoolDetails['principal_name'] }}
+                                        <br>
+                                        <img src="{{ Storage::url($principal_signature) }}" alt="signature" class="logo-img" style="height: 50px;">
+
+                                    </td>
                                 </tr>  
                                 <tr style="padding:10px;">
                                     <td><b>Overall Total</b></td>
                                     <td><b>Average</b></td>
                                     <td><b>Teacher's Comment</b></td>
+                                    <td><b>Principal</b></td>
                                 </tr>
 
 

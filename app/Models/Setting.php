@@ -18,6 +18,8 @@ class Setting extends Model
         'meta_description',
         'meta_keywords',
         'frontend_theme',
+        'principal_name',
+        'principal_signature',
     ];
     
     
