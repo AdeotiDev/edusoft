@@ -18,6 +18,10 @@ class ResultRoot extends Model
         'exam_score_columns',
         'grading_system_id',
         'next_term',
+        'section_address',
+        'logo',
+        'teacher_id',
+
     ];
 
 
@@ -28,9 +32,24 @@ class ResultRoot extends Model
 
 
 
+    public function resultUploads()
+    {
+        return $this->hasMany(ResultUpload::class, 'result_root_id');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(User::class, 'teacher_id');
+    }
+
 
     public function gradingSystem()
     {
         return $this->belongsTo(GradingSystem::class);
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'result_root_id');
     }
 }
