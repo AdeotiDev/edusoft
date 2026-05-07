@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('skill_behaviour_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->unsignedTinyInteger('score'); // 1–5 scale
+            $table->unsignedTinyInteger('score'); 
             $table->timestamps();
         });
     }
